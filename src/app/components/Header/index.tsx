@@ -1,7 +1,6 @@
 "use client"
 
 import { SignedIn, SignInButton, UserButton, SignedOut, useUser } from '@clerk/nextjs';
-
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
@@ -13,14 +12,14 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-gray-800 text-white py-4 px-10 flex justify-between items-center">
+    <header className="bg-gray-800 text-white py-4 px-10 flex justify-between items-center mb-10 shadow-lg">
       <h1 
         className="text-2xl font-bold cursor-pointer"
         onClick={handleHome}
       >
         PWEB Fórum
       </h1>
-      <div>
+      <nav className="flex items-center gap-6">
         <SignedIn>
           <div className='flex items-center gap-3'>
             {user && <span className="text-white">{user.fullName}</span>}
@@ -34,7 +33,7 @@ export default function Header() {
             </button>
           </SignInButton>
         </SignedOut>
-      </div>
+      </nav>
     </header>
   );
 }
