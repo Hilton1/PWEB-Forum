@@ -9,7 +9,7 @@ interface ConfirmationModalProps {
 
 export default function ConfirmationModal({ isOpen, onClose, onConfirm, submitting }: ConfirmationModalProps) {
   const modalClassName = isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95';
-  const modalStyle = isOpen ? {} : { pointerEvents: 'none' };
+  const modalStyle: React.CSSProperties = isOpen ? {} : { pointerEvents: 'none' };
 
   return (
     <div className={`fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ${modalClassName}`} style={modalStyle}>
