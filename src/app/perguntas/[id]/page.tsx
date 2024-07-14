@@ -7,6 +7,7 @@ import { fetchPerguntaById, fetchUser, Pergunta, User, addResposta, updateRespos
 import { useUser } from '@clerk/nextjs';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { ClipLoader } from 'react-spinners';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function PerguntaDetalhe() {
   const params = useParams();
@@ -51,7 +52,11 @@ export default function PerguntaDetalhe() {
 
   const handleSubmitNew = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newResposta || !user?.id) return;
+    if (!user?.id) {
+      toast.error('Você precisa estar logado para enviar uma resposta.');
+      return;
+    }
+    if (!newResposta) return;
 
     setSubmittingNew(true);
     try {
@@ -137,6 +142,7 @@ export default function PerguntaDetalhe() {
 
   return (
     <div className="w-full max-w-3xl mx-auto p-4">
+      <Toaster />
       <div className="bg-white p-6 rounded-lg shadow">
         <div className="flex items-center mb-4">
           <Image

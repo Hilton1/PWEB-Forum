@@ -7,6 +7,7 @@ import AddPerguntaModal from '@/app/components/AddPerguntaModal';
 import ConfirmationModal from '@/app/components/ConfirmationModal';
 import { useUser } from '@clerk/nextjs';
 import { FaEdit, FaTrash, FaFilter } from 'react-icons/fa';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function Home() {
   const [perguntas, setPerguntas] = useState<Pergunta[]>([]);
@@ -93,8 +94,18 @@ export default function Home() {
     }
   };
 
+  const handleNewPerguntaClick = () => {
+    if (user) {
+      setShowForm(true);
+      setEditPergunta(null);
+    } else {
+      toast.error('Você precisa estar logado para fazer uma nova pergunta!');
+    }
+  };
+
   return (
     <div className="w-full max-w-3xl mx-auto p-4">
+      <Toaster />
       <div className="text-gray-700 mb-6">
         <label htmlFor="search" className="block mb-2 font-semibold">
           Pesquisar pergunta:
@@ -139,10 +150,7 @@ export default function Home() {
       </div>
       <div className="flex justify-between mb-6">
         <button
-          onClick={() => {
-            setShowForm(true);
-            setEditPergunta(null);
-          }}
+          onClick={handleNewPerguntaClick}
           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
           Nova Pergunta
